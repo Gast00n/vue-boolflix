@@ -8,12 +8,16 @@ const app = new Vue({
     el:'#app',
     data: {
         searchKey: '',
-        filterFilms: []
+        filterFilms: [],
+        filterSeries: [],
+        filterAll: []
     },
     created() {
     },
     methods: {
         filterAPI() {
+
+            // PRENDO TUTTI I FILM CON LA KEY
             axios.get('http://api.themoviedb.org/3/search/movie', {
                 params: {
                     api_key: '39c2c769e3bc33c0ccd48f3c8b9612d6',
@@ -22,15 +26,58 @@ const app = new Vue({
                 }
             })
             .then( result => {
-                console.log(result.data.results);
+                // Pusho la selezione in un array per i film
                 if (this.searchKey != '') {
                     this.filterFilms = result.data.results;
-                    console.log(this.filterFilms);                             
                 }
+
+                // Seleziono gli elementi dell'array che voglio passare all'array di oggettiche contiente tutto.
+                this.filterFilms.forEach( (films)  => {   
+                    this.filterAll.push({
+                        titolo: films.title,
+                        titoloOrig: films.original_title,
+                        lang: films.original_language,
+                        stars: films.vote_average,
+                        media: 'film'
+                    });
+                });
+                
             })
             .catch( error => {
                 console.log('Errore riscontrato: ',error);
+            });
+
+            // PRENDO TUTTE LE SERIE CON LA KEY
+            axios.get('http://api.themoviedb.org/3/search/tv', {
+                params: {
+                    api_key: '39c2c769e3bc33c0ccd48f3c8b9612d6',
+                    language: 'it-IT',
+                    query: this.searchKey,
+                }
             })
+            .then( result => {
+                // Pusho la selezione in un array per i film
+                if (this.searchKey != '') {
+                    this.filterSeries = result.data.results;
+                }
+
+                // Seleziono gli elementi dell'array che voglio passare all'array di oggettiche contiente tutto.
+                this.filterSeries.forEach( (series)  => {   
+                    this.filterAll.push({
+                        titolo: series.name,
+                        titoloOrig: series.original_name,
+                        lang: series.original_language,
+                        stars: series.vote_average,
+                        media: 'series'
+                    });
+                });
+                
+            })
+            .catch( error => {
+                console.log('Errore riscontrato: ',error);
+            });
+            
+            // PULISCO LA SEARCH
             this.search = '';
         },
 
