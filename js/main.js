@@ -22,8 +22,11 @@ const app = new Vue({
                 }
             })
             .then( result => {
+
+                console.log(result.data.results);
                 if (this.searchKey != '') {
-                    this.filterFilms = result.data.results;                              
+                    this.filterFilms = result.data.results;
+                    console.log(this.filterFilms);                             
                 }
             })
             .catch( error => {
