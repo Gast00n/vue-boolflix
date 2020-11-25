@@ -23,9 +23,12 @@
                     <h3 class="title">Titolo Opera: {{film.title}}</h3>
                     <h4 class="orig-title">Titolo Opera Originale: {{film.original_title}}</h4>
                     <p class="language">
-                        Lingua:{{film.original_language}}
+                        <span v-if="film.original_language === 'it' || film.original_language === 'it-IT'">Lingua: <img src="./img/it.png" alt=""></span>
+                        <span v-else-if="film.original_language === 'en' || film.original_language === 'en-EN'">Lingua: <img src="./img/en.png" alt=""></span>
+                        <span v-else>Lingua: {{film.original_language}}</span>
                     </p>
                     <div class="votes">
+                        Rating:
                         <i v-for="n in getVote(film.vote_average)" class="fas fa-star"></i>
                         <i v-for="n in 5 - getVote(film.vote_average)" class="far fa-star"></i>
                     </div>
