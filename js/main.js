@@ -8,29 +8,28 @@ const app = new Vue({
     el:'#app',
     data: {
         searchKey: '',
-        filterFilms: [],
-        allFilms: []
+        filterFilms: []
+    },
+    created() {
     },
     methods: {
         filterAPI() {
-            axios.get('https://api.themoviedb.org/3/movie/550?api_key=39c2c769e3bc33c0ccd48f3c8b9612d6&language=it-IT')
+            axios.get('http://api.themoviedb.org/3/search/movie', {
+                params: {
+                    api_key: '39c2c769e3bc33c0ccd48f3c8b9612d6',
+                    language: 'it-IT',
+                    query: this.searchKey,
+                }
+            })
             .then( result => {
- 
-                result.data.filter( (films) => {
-                    if (films.title.includes(this.searchKey) || films.original_title.includes(this.searchKey)) {
-                        this.filterFilms.push({
-                            titolo: films.title,
-                            titoloOrig: films.original_title,
-                            lang: films.original_language,
-                            vote: getVote(films.vote_average)
-                        });
-                    }
-                });
-                                               
+                if (this.searchKey != '') {
+                    this.filterFilms = result.data.results;                              
+                }
             })
             .catch( error => {
-                console.log(error);
-            });
+                console.log('Errore riscontrato: ',error);
+            })
+            this.search = '';
         },
 
         getVote(vote) {

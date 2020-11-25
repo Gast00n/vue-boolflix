@@ -14,15 +14,15 @@
 
     <div id="app">
         <div class="search-box">
-            <input type="text" v-on:keyup.enter="filterAPI" v-model="searchKey" >
+            <input type="text" @keyup.enter="filterAPI" v-model="searchKey" >
             <button class="btn" @click="filterAPI">Search!</button>
         </div>
         <div class="results">
             <ul class="list-result">
                 <li v-for="film in filterFilms" class="result">
-                    <h3 class="title">Titolo Opera: {{film.titolo}}</h3>
-                    <h4 class="orig-title">Titolo Opera Originale: {{film.titoloOrig}}</h4>
-                    <p class="language">Lingua:{{film.lang}}</p>
+                    <h3 class="title">Titolo Opera: {{film.title}}</h3>
+                    <h4 class="orig-title">Titolo Opera Originale: {{film.title_original}}</h4>
+                    <p class="language">Lingua:{{film.language}}</p>
                     <div class="votes">
                         <i v-for="n in getVote(film.vote)" class="fas fa-star"></i>
                         <i v-for="n in 5 - getVote(film.vote)" class="far fa-star"></i>
