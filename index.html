@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoolFix</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css'/>
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- Include Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> <!-- Developer Mode-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> Production Mode -->
+</head>
+<body>
+
+    <div id="app">
+        <div class="search-box">
+            <input type="text">
+            <button class="btn">Search!</button>
+        </div>
+        <div class="results">
+            <ul class="list-result">
+                <li class="result">
+                    <h3 class="title">Titolo Opera:</h3>
+                    <h4 class="orig-title">Titolo Opera Originale:</h4>
+                    <p class="language">Lingua:</p>
+                    <div class="votes">
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Include Axios -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.js'></script>
+    <!-- Include JS -->
+    <script src="./js/main.js"></script>
+</body>
+</html>
