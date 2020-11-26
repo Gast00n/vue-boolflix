@@ -13,13 +13,41 @@
 <body>
 
     <div id="app">
-        <div class="search-box">
-            <input type="text" @keyup.enter="filterAPI" v-model="searchKey" >
-            <button class="btn" @click="filterAPI">Search!</button>
+        <div class="header">
+            <div class="logo">
+                <img src="./img/logo.png" alt="">
+            </div>
+            <div class="search-box">
+                <button class="btn" @click="filterAPI"><i class="fas fa-search"></i></button>
+                <input type="text" @keyup.enter="filterAPI" v-model="searchKey" >
+            </div>
         </div>
         <div class="results">
             <ul class="list-result">
-                <li v-for="film in filterAll" class="result">
+                <li v-for="film in filterAll" class="box">
+                    <div class="image-box">
+                        <img :src="film.img" alt="" class="img-show">
+                        
+                        <div class="overflow">
+                            <div class="text-overflow">
+                                <h3 class="title">{{film.titolo}}
+                                    <!-- <i v-if="" :class="['fas', film.media === 'film' ? 'fa-film' : 'fa-tv']"></i> -->
+                                </h3>
+                                <h4 class="orig-title">{{film.titoloOrig}}</h4>
+                                <p class="language">
+                                    <span v-if="film.lang === 'it' || film.lang === 'it-IT'">Lingua: <img src="./img/it.png" alt=""></span>
+                                    <span v-else-if="film.lang === 'en' || film.lang === 'en-EN'">Lingua: <img src="./img/en.png" alt=""></span>
+                                    <span v-else>Lingua: {{film.lang}}</span>
+                                </p>
+                                <div class="votes">
+                                    <i v-for="n in getVote(film.stars)" class="fas fa-star"></i>
+                                    <i v-for="n in 5 - getVote(film.stars)" class="far fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <!-- <li v-for="film in filterAll" class="result">
                     <h3 class="title">Titolo Opera: {{film.titolo}}
                         <i v-if="" :class="['fas', film.media === 'film' ? 'fa-film' : 'fa-tv']"></i>
                     </h3>
@@ -34,7 +62,7 @@
                         <i v-for="n in getVote(film.stars)" class="fas fa-star"></i>
                         <i v-for="n in 5 - getVote(film.stars)" class="far fa-star"></i>
                     </div>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>

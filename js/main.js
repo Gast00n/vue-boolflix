@@ -17,6 +17,9 @@ const app = new Vue({
     methods: {
         filterAPI() {
 
+            this.filterFilms = [];
+            this.filterSeries = [];
+            this.filterAll = [];
             // PRENDO TUTTI I FILM CON LA KEY
             axios.get('http://api.themoviedb.org/3/search/movie', {
                 params: {
@@ -36,6 +39,7 @@ const app = new Vue({
                     this.filterAll.push({
                         titolo: films.title,
                         titoloOrig: films.original_title,
+                        img: `https://image.tmdb.org/t/p/w780/${films.poster_path}`,
                         lang: films.original_language,
                         stars: films.vote_average,
                         media: 'film'
@@ -66,6 +70,7 @@ const app = new Vue({
                     this.filterAll.push({
                         titolo: series.name,
                         titoloOrig: series.original_name,
+                        img: `https://image.tmdb.org/t/p/w780/${series.poster_path}`,
                         lang: series.original_language,
                         stars: series.vote_average,
                         media: 'series'
@@ -79,6 +84,7 @@ const app = new Vue({
             
             // PULISCO LA SEARCH
             this.search = '';
+
         },
 
         getVote(vote) {
