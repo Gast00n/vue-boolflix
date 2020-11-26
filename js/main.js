@@ -35,15 +35,28 @@ const app = new Vue({
                 }
 
                 // Seleziono gli elementi dell'array che voglio passare all'array di oggettiche contiente tutto.
-                this.filterFilms.forEach( (films)  => {   
-                    this.filterAll.push({
-                        titolo: films.title,
-                        titoloOrig: films.original_title,
-                        img: `https://image.tmdb.org/t/p/w780/${films.poster_path}`,
-                        lang: films.original_language,
-                        stars: films.vote_average,
-                        media: 'film'
-                    });
+                this.filterFilms.forEach( (films)  => {
+                    
+                    if (film.poster_path != '') {
+                        this.filterAll.push({
+                            titolo: films.title,
+                            titoloOrig: films.original_title,
+                            img: `https://image.tmdb.org/t/p/w780/${films.poster_path}`,
+                            lang: films.original_language,
+                            stars: films.vote_average,
+                            media: 'film'
+                        });
+                    } else {
+                        this.filterAll.push({
+                            titolo: films.title,
+                            titoloOrig: films.original_title,
+                            img: '../img/placeholder.png',
+                            lang: films.original_language,
+                            stars: films.vote_average,
+                            media: 'film'
+                        });
+                    }
+                    
                 });
                 
             })
