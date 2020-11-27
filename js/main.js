@@ -42,7 +42,6 @@ const app = new Vue({
                     } else {
                         films.poster_path = `https://image.tmdb.org/t/p/w780/${films.poster_path}`;
                     }
-                    
                 });
                 
             })
