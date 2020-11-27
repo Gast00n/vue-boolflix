@@ -15,59 +15,99 @@
     <div id="app">
         <div class="header">
             <div class="logo">
-                <img src="./img/logo.png" alt="">
+                <a href="#"><img src="https://fontmeme.com/permalink/201127/5dd131f34650ee16d14564dc7664eaec.png" alt="netflix-font" border="0"></a>
             </div>
             <div class="search-box">
                 <button class="btn" @click="filterAPI"><i class="fas fa-search"></i></button>
                 <input type="text" @keyup.enter="filterAPI" v-model="searchKey" >
             </div>
         </div>
-        <div class="results" v-dragscroll>
-            <ul class="list-result">
-                <li v-for="film in filterAll" class="box">
-                    <div class="image-box">
-                        <img :src="film.img" alt="" class="img-show">
-                        
-                        <div class="overflow">
-                            <div class="text-overflow">
-                                <h3 class="title">{{film.titolo}}
-                                    <!-- <i v-if="" :class="['fas', film.media === 'film' ? 'fa-film' : 'fa-tv']"></i> -->
-                                </h3>
-                                <h4 class="orig-title">{{film.titoloOrig}}</h4>
-                                <p class="descr">
-                                    {{film.shortDescr}}
-                                </p>
-                                <div class="lang-rate">
-                                    <p class="language">
-                                        <img v-if="film.lang === 'it' || film.lang === 'it-IT'" src="./img/it.png" alt="">
-                                        <img v-else-if="film.lang === 'en' || film.lang === 'en-EN'"src="./img/en.png" alt="">
-                                        <span v-else> Language: {{film.lang}}</span>
-                                    </p>
-                                    <div class="votes">
-                                        <i v-for="n in getVote(film.stars)" class="fas fa-star"></i><i v-for="n in 5 - getVote(film.stars)" class="far fa-star"></i>
+        <div class="emphasize" v-if="filterFilms.length == 0 && filterSeries.length == 0"><p>Che aspetti? Sfoglia il nostro catalogo!</p></div>
+        <div v-else>
+            <!-- FILMS -->
+            <div class="category">
+                <h2>Film</h2>
+            </div>
+            <div class="results" v-dragscroll>
+                <!-- Controllo Presenza di film -->
+                <div v-if="filterFilms.length != 0">
+                    <ul class="list-result">
+                        <li v-for="film in filterFilms" class="box">
+                                <div class="image-box">
+                                    <img :src="film.poster_path" alt="" class="img-show">
+                                    
+                                    <div class="overflow">
+                                        <div class="text-overflow">
+                                            <h3 class="title">{{film.title}}
+                                                <!-- <i v-if="" :class="['fas', film.media === 'film' ? 'fa-film' : 'fa-tv']"></i> -->
+                                            </h3>
+                                            <h4 class="orig-title">{{film.original_title}}</h4>
+                                            <p class="descr">
+                                                {{film.overview}}
+                                            </p>
+                                            <div class="lang-rate">
+                                                <p class="language">
+                                                    <img v-if="film.original_language === 'it'" src="./img/it.png" alt="">
+                                                    <img v-else-if="film.original_language === 'en'"src="./img/en.png" alt="">
+                                                    <span v-else> Language: {{film.original_language}}</span>
+                                                </p>
+                                                <div class="votes">
+                                                    <i v-for="n in getVote(film.vote_average)" class="fas fa-star"></i><i v-for="n in 5 - getVote(film.stars)" class="far fa-star"></i>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </li>
-                <!-- <li v-for="film in filterAll" class="result">
-                    <h3 class="title">Titolo Opera: {{film.titolo}}
-                        <i v-if="" :class="['fas', film.media === 'film' ? 'fa-film' : 'fa-tv']"></i>
-                    </h3>
-                    <h4 class="orig-title">Titolo Opera Originale: {{film.titoloOrig}}</h4>
-                    <p class="language">
-                        <span v-if="film.lang === 'it' || film.lang === 'it-IT'">Lingua: <img src="./img/it.png" alt=""></span>
-                        <span v-else-if="film.lang === 'en' || film.lang === 'en-EN'">Lingua: <img src="./img/en.png" alt=""></span>
-                        <span v-else>Lingua: {{film.lang}}</span>
-                    </p>
-                    <div class="votes">
-                        Rating:
-                        <i v-for="n in getVote(film.stars)" class="fas fa-star"></i>
-                        <i v-for="n in 5 - getVote(film.stars)" class="far fa-star"></i>
-                    </div>
-                </li> -->
-            </ul>
+                        </li>
+                    </ul>
+                <div v-else class="noResult">
+                    <p>Nessun film trovato, prova a cambiare chiave di ricerca!</p>
+                </div>
+            </div>
+            
+            <!-- SERIES -->
+            <div class="category">
+                <h2>Series</h2>
+            </div>
+            <div class="results" v-dragscroll>
+                <!-- Controllo Presenza di film -->
+                <div v-if="filterSeries.length != 0">
+                    <ul class="list-result">
+                        <li v-for="serie in filterSeries" class="box">
+                                <div class="image-box">
+                                    <img :src="serie.poster_path" alt="" class="img-show">
+                                    
+                                    <div class="overflow">
+                                        <div class="text-overflow">
+                                            <h3 class="title">{{serie.name}}
+                                                <!-- <i v-if="" :class="['fas', film.media === 'film' ? 'fa-film' : 'fa-tv']"></i> -->
+                                            </h3>
+                                            <h4 class="orig-title">{{serie.original_name}}</h4>
+                                            <p class="descr">
+                                                {{serie.overview}}
+                                            </p>
+                                            <div class="lang-rate">
+                                                <p class="language">
+                                                    <img v-if="serie.original_language === 'it'" src="./img/it.png" alt="">
+                                                    <img v-else-if="serie.original_languageg === 'en'"src="./img/en.png" alt="">
+                                                    <span v-else> Language: {{serie.original_language}}</span>
+                                                </p>
+                                                <div class="votes">
+                                                    <i v-for="n in getVote(serie.vote_average)" class="fas fa-star"></i><i v-for="n in 5 - getVote(film.stars)" class="far fa-star"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </li>
+                    </ul>
+                <div v-else class="noResult">
+                    <p>Nessuna serie trovata, prova a cambiare chiave di ricerca!</p>
+                </div>
+            </div>
         </div>
     </div>
     

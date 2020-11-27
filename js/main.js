@@ -10,8 +10,7 @@ const app = new Vue({
         apiKey: '39c2c769e3bc33c0ccd48f3c8b9612d6',
         searchKey: '',
         filterFilms: [],
-        filterSeries: [],
-        filterAll: []
+        filterSeries: []
     },
     created() {
     },
@@ -20,7 +19,7 @@ const app = new Vue({
 
             this.filterFilms = [];
             this.filterSeries = [];
-            this.filterAll = [];
+
             // PRENDO TUTTI I FILM CON LA KEY
             axios.get('http://api.themoviedb.org/3/search/movie', {
                 params: {
@@ -35,36 +34,20 @@ const app = new Vue({
                     this.filterFilms = result.data.results;
                 }
 
-                // Seleziono gli elementi dell'array che voglio passare all'array di oggettiche contiente tutto.
+                // Ottimizo l'output.
                 this.filterFilms.forEach( (films)  => {
-                    
-                    if (films.poster_path === null) {
-                        this.filterAll.push({
-                            titolo: films.title,
-                            titoloOrig: films.original_title,
-                            img: './img/placeholder.png',
-                            lang: films.original_language,
-                            stars: films.vote_average,
-                            shortDescr: this.shortDesc(films.overview),
-                            media: 'film'
-                        });
+                    films.overview = this.shortDesc(films.overview);                    
+                    if (films.poster_path === 'null') {
+                        films.poster_path = './img/placeholder.png';
                     } else {
-                        this.filterAll.push({
-                            titolo: films.title,
-                            titoloOrig: films.original_title,
-                            img: `https://image.tmdb.org/t/p/w780/${films.poster_path}`,
-                            lang: films.original_language,
-                            stars: films.vote_average,
-                            shortDescr: this.shortDesc(films.overview),
-                            media: 'film'
-                        });
+                        films.poster_path = `https://image.tmdb.org/t/p/w780/${films.poster_path}`;
                     }
                     
                 });
                 
             })
             .catch( error => {
-                console.log('Errore riscontrato: ',error);
+                console.log(error);
             });
 
             // PRENDO TUTTE LE SERIE CON LA KEY
@@ -81,35 +64,20 @@ const app = new Vue({
                     this.filterSeries = result.data.results;
                 }
 
-                // Seleziono gli elementi dell'array che voglio passare all'array di oggettiche contiente tutto.
-                this.filterSeries.forEach( (series)  => {   
-
-                    if (series.poster_path === null) {
-                        this.filterAll.push({
-                            titolo: series.name,
-                            titoloOrig: series.original_name,    
-                            img: './img/placeholder.png',
-                            lang: series.original_language,
-                            stars: series.vote_average,
-                            shortDescr: this.shortDesc(series.overview),
-                            media: 'series'
-                        });
+                // Ottimizo l'output.
+                this.filterSeries.forEach( (series)  => {
+                    series.overview = this.shortDesc(series.overview);                    
+                    if (series.poster_path === 'null') {
+                        series.poster_path = './img/placeholder.png';
                     } else {
-                            this.filterAll.push({
-                                titolo: series.name,
-                                titoloOrig: series.original_name,
-                                img: `https://image.tmdb.org/t/p/w780/${series.poster_path}`,
-                                lang: series.original_language,
-                                stars: series.vote_average,
-                                shortDescr: this.shortDesc(series.overview),
-                                media: 'series'
-                            });
+                        series.poster_path = `https://image.tmdb.org/t/p/w780/${films.poster_path}`;
                     }
+                    
                 });
                 
             })
             .catch( error => {
-                console.log('Errore riscontrato: ',error);
+                console.log(error);
             });
             
             // PULISCO LA SEARCH
@@ -123,8 +91,8 @@ const app = new Vue({
 
         //Funzione per accorciare la descrizione
         shortDesc(element) {
-            if (element.length > 300){
-                return element = element.slice(0,300).concat('...');
+            if (element.length > 200){
+                return element = element.slice(0,200).concat('...');
             };
         }
     }
