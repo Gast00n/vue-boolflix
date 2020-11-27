@@ -52,7 +52,7 @@
                                                     <span v-else> Language: {{film.original_language}}</span>
                                                 </p>
                                                 <div class="votes">
-                                                    <i v-for="n in getVote(film.vote_average)" class="fas fa-star"></i><i v-for="n in 5 - getVote(film.stars)" class="far fa-star"></i>
+                                                    <i v-for="n in getVote(film.vote_average)" class="fas fa-star"></i><i v-for="n in 5 - getVote(film.vote_average)" class="far fa-star"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -94,7 +94,7 @@
                                                     <span v-else> Language: {{serie.original_language}}</span>
                                                 </p>
                                                 <div class="votes">
-                                                    <i v-for="n in getVote(serie.vote_average)" class="fas fa-star"></i><i v-for="n in 5 - getVote(film.stars)" class="far fa-star"></i>
+                                                    <i v-for="n in getVote(serie.vote_average)" class="fas fa-star"></i><i v-for="n in 5 - getVote(serie.vote_average)" class="far fa-star"></i>
                                                 </div>
                                             </div>
                                         </div>
