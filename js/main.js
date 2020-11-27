@@ -10,7 +10,9 @@ const app = new Vue({
         apiKey: '39c2c769e3bc33c0ccd48f3c8b9612d6',
         searchKey: '',
         filterFilms: [],
-        filterSeries: []
+        filterSeries: [],
+        allFilmGen: [],
+        allSerieGen: []
     },
     created() {
     },
@@ -69,7 +71,7 @@ const app = new Vue({
                     if (series.poster_path === 'null') {
                         series.poster_path = './img/placeholder.png';
                     } else {
-                        series.poster_path = `https://image.tmdb.org/t/p/w780/${films.poster_path}`;
+                        series.poster_path = `https://image.tmdb.org/t/p/w780/${series.poster_path}`;
                     }
                     
                 });
@@ -83,6 +85,24 @@ const app = new Vue({
             this.search = '';
 
         },
+
+        // Filtriamo i generi
+        // filterGenre(type) {
+        //     if (type == 'film') {
+        //         this.filterFilms.forEach(film) {
+        //             if ( ! this.allFilmGen.includes(film.genres) ) {
+        //                 this.allFilmGen.push(film.genres);
+        //             }
+        //         };
+        //     } else {
+        //         this.filterSeries.forEach(serie) {
+        //             if ( ! this.allSerieGen.includes(serie.genres) ) {
+        //                 this.allSerieGen.push(serie.genres);
+        //             }
+        //         };
+        //     }
+        // },
+
         //Funzione per modificare l'output voto
         getVote(vote) {
             return Math.ceil(vote / 2);

@@ -105,6 +105,10 @@ body {
 
 .category {
     padding: 50px 0 0 50px ;
+    display: inline-flex;
+    justify-content: flex-start;
+    align-content: space-between;
+    width: 100%;
 }
 
 .category h2 {
@@ -112,7 +116,24 @@ body {
     color: #fff;
     font-size: 30px;
     letter-spacing: 2px;
+    flex-grow: 1;
 }
+
+.category select {
+    position: relative;
+    width: 300px;
+    text-align: center;
+    font-family: sans-serif;
+    border-radius: 10px;
+    border: none;
+    background-color: #e50913;
+    color: #fff;
+} 
+
+
+.select-selected {
+    background-color: DodgerBlue;
+  }
 
 ul.list-result {
     display: inline-flex;

@@ -27,6 +27,10 @@
             <!-- FILMS -->
             <div class="category">
                 <h2>Film</h2>
+                <select v-if="filterFilms.length != 0" v-model="actualFilmGenre" @change="filterGenre(film)" class="genere">
+                    <option value="all">Tutti</option>
+                    <!-- <option v-for="filmGenre in allFilmGen" :value="filmGenre">{{filmGenre}}</option> -->
+                </select>
             </div>
             <div class="results" v-dragscroll>
                 <!-- Controllo Presenza di film -->
@@ -69,6 +73,10 @@
             <!-- SERIES -->
             <div class="category">
                 <h2>Series</h2>
+                <select v-if="filterSeries.length != 0" v-model="actualFilmGenre" @change="filterGenre(film)" class="genere">
+                    <option value="all">Tutti</option>
+                    <!-- <option v-for="filmGenre in allFilmGen" :value="filmGenre">{{filmGenre}}</option> -->
+                </select>
             </div>
             <div class="results" v-dragscroll>
                 <!-- Controllo Presenza di film -->
