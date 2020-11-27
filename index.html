@@ -34,10 +34,13 @@
                                     <!-- <i v-if="" :class="['fas', film.media === 'film' ? 'fa-film' : 'fa-tv']"></i> -->
                                 </h3>
                                 <h4 class="orig-title">{{film.titoloOrig}}</h4>
+                                <p class="descr">
+                                    {{film.shortDescr}}
+                                </p>
                                 <p class="language">
-                                    <span v-if="film.lang === 'it' || film.lang === 'it-IT'">Lingua: <img src="./img/it.png" alt=""></span>
-                                    <span v-else-if="film.lang === 'en' || film.lang === 'en-EN'">Lingua: <img src="./img/en.png" alt=""></span>
-                                    <span v-else>Lingua: {{film.lang}}</span>
+                                    <span v-if="film.lang === 'it' || film.lang === 'it-IT'"><img src="./img/it.png" alt=""></span>
+                                    <span v-else-if="film.lang === 'en' || film.lang === 'en-EN'"><img src="./img/en.png" alt=""></span>
+                                    <span v-else> Language: {{film.lang}}</span>
                                 </p>
                                 <div class="votes">
                                     <i v-for="n in getVote(film.stars)" class="fas fa-star"></i>

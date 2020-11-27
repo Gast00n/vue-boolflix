@@ -25,7 +25,7 @@ body {
 }
 
 .header img {
-    width: 25px;
+    width: 100px;
 }
 
 .header .search-box {
@@ -59,6 +59,7 @@ body {
 /* RISULTATI */
 
 .results {
+    padding: 50px;
     width: 100%;
     overflow-x: auto;
 }
@@ -79,6 +80,13 @@ li.box {
     position: relative;
     transform: all 0.4s;
     margin: 50px 3px;
+    transition: transform 0.7s;
+}
+
+li.box:hover,
+li.box:focus {
+    z-index: 1;
+    transform:scale(1.2);
 }
 
 li.box:hover {
@@ -99,7 +107,7 @@ li.box .overflow{
     background: linear-gradient(0deg, rgba(20,20,20,1) 0%, rgba(20,20,20,1) 55%, rgba(20,20,20,0.75) 75%, rgba(20,20,20,0) 100%);
     color: #fff;
     opacity: 0;
-    transform: all 0.4s;
+    transition: opacity .4s;
 }
 
 li.box .overflow h3 {
@@ -120,19 +128,13 @@ li.box .overflow .language img {
 li.box:hover .overflow,
 li.box:focus .overflow {
     opacity: 1;
+    z-index: 1;
 }
 
 .box img {
     width: 100%;
 }
 
-
-
-.result {
-    margin: 10px 0;
-    padding: 10px;
-}
-
 .language img {
-    max-width: 45px;
+    max-width: 25px;
 }
