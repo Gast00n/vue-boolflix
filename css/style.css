@@ -64,6 +64,10 @@ body {
     overflow-x: auto;
 }
 
+.results:hover {
+    cursor:grab;
+}
+
 ul.list-result {
     display: inline-flex;
 }
@@ -119,11 +123,21 @@ li.box .overflow h4 {
     font-size: 22px;
     font-style: italic;
 }
-li.box .overflow .language img {
-    border-radius: 100%;
+
+li.box .overflow .descr {
+    margin: 20px 0;
 }
 
+li.box .overflow .lang-rate {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
 
+li.box .overflow .lang-rate .votes i .fa-star {
+    margin: 0 5px;
+}
 
 li.box:hover .overflow,
 li.box:focus .overflow {
@@ -137,4 +151,5 @@ li.box:focus .overflow {
 
 .language img {
     max-width: 25px;
+    border-radius: 100%;
 }

@@ -22,7 +22,7 @@
                 <input type="text" @keyup.enter="filterAPI" v-model="searchKey" >
             </div>
         </div>
-        <div class="results">
+        <div class="results" v-dragscroll>
             <ul class="list-result">
                 <li v-for="film in filterAll" class="box">
                     <div class="image-box">
@@ -37,14 +37,15 @@
                                 <p class="descr">
                                     {{film.shortDescr}}
                                 </p>
-                                <p class="language">
-                                    <span v-if="film.lang === 'it' || film.lang === 'it-IT'"><img src="./img/it.png" alt=""></span>
-                                    <span v-else-if="film.lang === 'en' || film.lang === 'en-EN'"><img src="./img/en.png" alt=""></span>
-                                    <span v-else> Language: {{film.lang}}</span>
-                                </p>
-                                <div class="votes">
-                                    <i v-for="n in getVote(film.stars)" class="fas fa-star"></i>
-                                    <i v-for="n in 5 - getVote(film.stars)" class="far fa-star"></i>
+                                <div class="lang-rate">
+                                    <p class="language">
+                                        <img v-if="film.lang === 'it' || film.lang === 'it-IT'" src="./img/it.png" alt="">
+                                        <img v-else-if="film.lang === 'en' || film.lang === 'en-EN'"src="./img/en.png" alt="">
+                                        <span v-else> Language: {{film.lang}}</span>
+                                    </p>
+                                    <div class="votes">
+                                        <i v-for="n in getVote(film.stars)" class="fas fa-star"></i><i v-for="n in 5 - getVote(film.stars)" class="far fa-star"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -70,6 +71,8 @@
         </div>
     </div>
     
+    <!-- Include DragScroll for Vue -->
+    <script src="https://unpkg.com/vue-dragscroll"></script>
     <!-- Include Axios -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.js'></script>
     <!-- Include JS -->
